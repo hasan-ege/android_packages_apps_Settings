@@ -20,6 +20,10 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
+import android.os.Build;
+import android.view.Surface;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
@@ -35,6 +39,8 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
     private FaceUpdater mFaceUpdater;
 
     private Intent mIntent;
+    private Surface mPreviewSurface;
+    private boolean mEnrollmentPending;
 
     public FaceEnrollSidecar(int[] disabledFeatures, Intent intent) {
         mDisabledFeatures = Arrays.copyOf(disabledFeatures, disabledFeatures.length);
@@ -49,9 +55,28 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
 
     @Override
     public void startEnrollment() {
+        if ("metroid".equals(Build.DEVICE) && mPreviewSurface == null) {
+            mEnrollmentPending = true;
+            return;
+        }
+
         super.startEnrollment();
-        mFaceUpdater.enroll(mUserId, mToken, mEnrollmentCancel,
-                mEnrollmentCallback, mDisabledFeatures, mIntent);
+        if ("metroid".equals(Build.DEVICE)) {
+            mFaceUpdater.enroll(mUserId, mToken, mEnrollmentCancel,
+                    mEnrollmentCallback, mDisabledFeatures, mPreviewSurface,
+                    false /* debugConsent */, mIntent);
+        } else {
+            mFaceUpdater.enroll(mUserId, mToken, mEnrollmentCancel,
+                    mEnrollmentCallback, mDisabledFeatures, mIntent);
+        }
+    }
+
+    public void setPreviewSurface(@Nullable Surface previewSurface) {
+        mPreviewSurface = previewSurface;
+        if (mEnrollmentPending && previewSurface != null) {
+            mEnrollmentPending = false;
+            startEnrollment();
+        }
     }
 
     private FaceManager.EnrollmentCallback mEnrollmentCallback

@@ -27,6 +27,7 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,6 +65,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
     private CameraCaptureSession mCaptureSession;
     private CaptureRequest mPreviewRequest;
     private Size mPreviewSize;
+    private Surface mPreviewSurface;
     private ParticleCollection.Listener mListener;
 
     // View used to contain the circular cutout and enrollment animation drawable
@@ -90,18 +92,20 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         @Override
         public void onSurfaceTextureAvailable(
                 SurfaceTexture surfaceTexture, int width, int height) {
-            openCamera(width, height);
+            startPreview(surfaceTexture, width, height);
         }
 
         @Override
         public void onSurfaceTextureSizeChanged(
                 SurfaceTexture surfaceTexture, int width, int height) {
-            // Shouldn't be called, but do this for completeness.
-            configureTransform(width, height);
+            if (!"metroid".equals(Build.DEVICE)) {
+                configureTransform(width, height);
+            }
         }
 
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
+            releasePreviewSurface();
             return true;
         }
 
@@ -208,7 +212,10 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         // a camera and start preview from here (otherwise, we wait until the surface is ready in
         // the SurfaceTextureListener).
         if (mTextureView.isAvailable()) {
-            openCamera(mTextureView.getWidth(), mTextureView.getHeight());
+            startPreview(
+                    mTextureView.getSurfaceTexture(),
+                    mTextureView.getWidth(),
+                    mTextureView.getHeight());
         } else {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
@@ -218,6 +225,7 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
     public void onPause() {
         super.onPause();
         closeCamera();
+        releasePreviewSurface();
     }
 
     @Override
@@ -278,6 +286,25 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
             configureTransform(width, height);
         } catch (CameraAccessException e) {
             Log.e(TAG, "Unable to open camera", e);
+        }
+    }
+
+    private void startPreview(SurfaceTexture surfaceTexture, int width, int height) {
+        if (!"metroid".equals(Build.DEVICE)) {
+            openCamera(width, height);
+            return;
+        }
+
+        releasePreviewSurface();
+        surfaceTexture.setDefaultBufferSize(width, height);
+        mPreviewSurface = new Surface(surfaceTexture);
+        ((FaceEnrollEnrolling) requireActivity()).onPreviewSurfaceAvailable(mPreviewSurface);
+    }
+
+    private void releasePreviewSurface() {
+        if (mPreviewSurface != null) {
+            mPreviewSurface.release();
+            mPreviewSurface = null;
         }
     }
 
