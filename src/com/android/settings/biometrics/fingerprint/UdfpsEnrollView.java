@@ -138,8 +138,12 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
      * @param decreasePadding the decrease padding
      */
     void setDecreasePadding(int decreasePadding) {
-        mProgressBarRadius -= decreasePadding;
+        mProgressBarRadius = Math.max(0, mProgressBarRadius - decreasePadding);
         onSensorRectUpdated();
+    }
+
+    void setProgressBarTranslationY(float translationY) {
+        mFingerprintProgressView.setTranslationY(translationY);
     }
 
     private void onSensorRectUpdated() {
