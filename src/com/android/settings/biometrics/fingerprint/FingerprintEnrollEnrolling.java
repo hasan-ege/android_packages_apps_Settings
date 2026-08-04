@@ -326,8 +326,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             }
             // Keep the footer bar transparent so it doesn't overlap the UDFPS sensor.
             mShouldSetFooterBarBackground = false;
-            ((UdfpsEnrollEnrollingView) getLayout()).setSecondaryButtonBackground(
-                    Color.TRANSPARENT);
+            final UdfpsEnrollEnrollingView layout = (UdfpsEnrollEnrollingView) getLayout();
+            layout.setSecondaryButtonBackground(Color.TRANSPARENT);
+            // Keep the enrollment ring above the footer, as Nothing's stock enrollment UI does.
+            layout.post(layout::adjustUdfpsViewWithFooterBar);
         }
 
         final LayerDrawable fingerprintDrawable = mProgressBar != null

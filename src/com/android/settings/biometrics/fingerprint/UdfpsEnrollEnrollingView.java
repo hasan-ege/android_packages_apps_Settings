@@ -165,7 +165,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         return metrics.scaledDensity;
     }
 
-    void adjustUdfpsVieWithFooterBar() {
+    void adjustUdfpsViewWithFooterBar() {
         final FrameLayout allContent = findViewById(R.id.suc_layout_status);
         final ImageView udfpsProgressView = findViewById(
                 R.id.udfps_enroll_animation_fp_progress_view);
@@ -180,8 +180,8 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 - (footerBarHeight + navigationBarHeight);
 
         if (udfpsProgressDrawableBottom > footerBarTop) {
-            int adjustPadding = udfpsProgressDrawableBottom - footerBarTop;
-            setDecreasePadding(adjustPadding);
+            final int overlap = udfpsProgressDrawableBottom - footerBarTop;
+            mUdfpsEnrollView.setProgressBarTranslationY(-overlap);
         }
     }
 
