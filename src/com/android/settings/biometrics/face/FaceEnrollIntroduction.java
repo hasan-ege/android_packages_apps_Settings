@@ -156,18 +156,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         // Set text for views with multiple variations.
         final TextView infoMessageGlasses = findViewById(R.id.info_message_glasses);
         final TextView infoMessageLooking = findViewById(R.id.info_message_looking);
+        final TextView infoTitle = findViewById(R.id.info_title);
+        final TextView howTitle = findViewById(R.id.how_title);
         final TextView howMessage = findViewById(R.id.how_message);
         final TextView inControlTitle = findViewById(R.id.title_in_control);
         final TextView inControlMessage = findViewById(R.id.message_in_control);
         final TextView lessSecure = findViewById(R.id.info_message_less_secure);
-        infoMessageGlasses.setText(getInfoMessageGlasses());
-        infoMessageLooking.setText(getInfoMessageLooking());
-        inControlTitle.setText(getInControlTitle());
-        howMessage.setText(getHowMessage());
-        inControlMessage.setText(Html.fromHtml(getString(getInControlMessage()),
+        infoTitle.setText(FaceEnrollTextUtils.getText(this,
+                R.string.security_settings_face_enroll_introduction_info_title));
+        howTitle.setText(FaceEnrollTextUtils.getText(this,
+                R.string.security_settings_face_enroll_introduction_how_title));
+        infoMessageGlasses.setText(FaceEnrollTextUtils.getText(this, getInfoMessageGlasses()));
+        infoMessageLooking.setText(FaceEnrollTextUtils.getText(this, getInfoMessageLooking()));
+        inControlTitle.setText(FaceEnrollTextUtils.getText(this, getInControlTitle()));
+        howMessage.setText(FaceEnrollTextUtils.getText(this, getHowMessage()));
+        inControlMessage.setText(Html.fromHtml(
+                FaceEnrollTextUtils.getText(this, getInControlMessage()).toString(),
                 Html.FROM_HTML_MODE_LEGACY));
         inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
-        lessSecure.setText(getLessSecureMessage());
+        lessSecure.setText(FaceEnrollTextUtils.getText(this, getLessSecureMessage()));
 
         final ScrollView scrollView =
                 findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
@@ -180,7 +187,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             final TextView infoMessageRequireEyes = findViewById(R.id.info_message_require_eyes);
             infoRowRequireEyes.setVisibility(View.VISIBLE);
             iconRequireEyes.getBackground().setColorFilter(getIconColorFilter());
-            infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
+            infoMessageRequireEyes.setText(
+                    FaceEnrollTextUtils.getText(this, getInfoMessageRequireEyes()));
         }
 
 

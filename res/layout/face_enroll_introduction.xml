@@ -63,6 +63,7 @@
 
             <!-- Keep in mind -->
             <TextView
+                android:id="@+id/info_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/BiometricEnrollIntroTitle"
@@ -155,6 +156,7 @@
 
             <!-- How it works -->
             <TextView
+                android:id="@+id/how_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/BiometricEnrollIntroTitle"

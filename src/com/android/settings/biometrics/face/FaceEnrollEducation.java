@@ -100,7 +100,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                     final int descriptionRes = isChecked
                             ? R.string.security_settings_face_enroll_education_message_accessibility
                             : R.string.security_settings_face_enroll_education_message;
-                    setDescriptionText(descriptionRes);
+                    setDescriptionText(FaceEnrollTextUtils.getText(
+                            FaceEnrollEducation.this, descriptionRes));
 
                     if (isChecked) {
                         hideDefaultIllustration();
@@ -153,7 +154,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         setContentView(R.layout.face_enroll_education);
 
         setTitle(R.string.security_settings_face_enroll_education_title);
-        setDescriptionText(R.string.security_settings_face_enroll_education_message);
+        setDescriptionText(FaceEnrollTextUtils.getText(this,
+                R.string.security_settings_face_enroll_education_message));
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
 
