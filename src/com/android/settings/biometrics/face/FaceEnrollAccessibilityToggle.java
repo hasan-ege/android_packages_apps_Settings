@@ -59,6 +59,9 @@ public class FaceEnrollAccessibilityToggle extends LinearLayout {
         } finally {
             a.recycle();
         }
+        final TextView subtitleTextView = findViewById(R.id.subtitle);
+        subtitleTextView.setText(FaceEnrollTextUtils.getText(context,
+                R.string.security_settings_face_enroll_introduction_accessibility_expanded));
         mSwitch = findViewById(R.id.toggle);
         mSwitch.setChecked(false);
         mSwitch.setClickable(false);
