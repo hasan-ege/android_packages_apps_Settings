@@ -5,4 +5,8 @@
     <color name="homepage_glyph_matrix_foreground">@color/homepage_red_fg</color>
     <string name="glyph_matrix_settings_title">Glyph Matrix</string>
     <string name="glyph_matrix_settings_summary">Notifications, toys, always-on and recording light</string>
+    <color name="homepage_essential_key_background">@color/homepage_orange_bg</color>
+    <color name="homepage_essential_key_foreground">@color/homepage_orange_fg</color>
+    <string name="essential_key_settings_title">Essential Key</string>
+    <string name="essential_key_settings_summary">Flashlight, camera, silent mode and more</string>
 </resources>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="glyph_matrix_settings_summary">Bildirimler, oyuncaklar, her zaman açık ve kayıt ışığı</string>
+    <string name="essential_key_settings_title">Essential Key</string>
+    <string name="essential_key_settings_summary">Fener, kamera, sessiz mod ve daha fazlası</string>
 </resources>
