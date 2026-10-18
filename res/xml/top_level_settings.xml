@@ -75,6 +75,15 @@
         </com.android.settings.widget.HomepagePreference>
 
         <com.android.settings.widget.HomepagePreference
+            android:icon="@drawable/ic_homepage_essential_key"
+            android:key="top_level_essential_key"
+            android:order="-50"
+            android:title="@string/essential_key_settings_title"
+            android:summary="@string/essential_key_settings_summary">
+            <intent android:action="org.openglyph.ESSENTIAL_KEY" />
+        </com.android.settings.widget.HomepagePreference>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
             android:icon="@drawable/ic_apps_filled"
             android:key="top_level_apps"

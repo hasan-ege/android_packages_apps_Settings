@@ -71,6 +71,15 @@
         </com.android.settings.widget.HomepagePreference>
 
         <com.android.settings.widget.HomepagePreference
+            android:icon="@drawable/ic_homepage_essential_key"
+            android:key="top_level_essential_key"
+            android:order="-55"
+            android:title="@string/essential_key_settings_title"
+            android:summary="@string/essential_key_settings_summary">
+            <intent android:action="org.openglyph.ESSENTIAL_KEY" />
+        </com.android.settings.widget.HomepagePreference>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
             android:icon="@drawable/ic_notifications_filled"
             android:key="top_level_notifications"
