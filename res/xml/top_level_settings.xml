@@ -66,6 +66,15 @@
             settings:controller="com.crdroid.settings.TopLevelSettingsPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
+            android:icon="@drawable/ic_homepage_glyph_matrix"
+            android:key="top_level_glyph_matrix"
+            android:order="-50"
+            android:title="@string/glyph_matrix_settings_title"
+            android:summary="@string/glyph_matrix_settings_summary">
+            <intent android:action="org.openglyph.SETTINGS" />
+        </com.android.settings.widget.HomepagePreference>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
             android:icon="@drawable/ic_apps_filled"
             android:key="top_level_apps"
