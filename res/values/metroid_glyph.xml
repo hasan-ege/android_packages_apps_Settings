@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nothing Phone (3) (metroid): Settings homepage entry for OpenGlyph's Glyph Matrix settings. -->
+<resources>
+    <color name="homepage_glyph_matrix_background">@color/homepage_red_bg</color>
+    <color name="homepage_glyph_matrix_foreground">@color/homepage_red_fg</color>
+    <string name="glyph_matrix_settings_title">Glyph Matrix</string>
+    <string name="glyph_matrix_settings_summary">Notifications, toys, always-on and recording light</string>
+</resources>
