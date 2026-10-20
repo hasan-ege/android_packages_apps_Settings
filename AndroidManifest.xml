@@ -6405,8 +6405,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- metroid: no hourly donation reminder (it re-arms a wake-up alarm every hour until
+             tapped, and Settings has no switch for it). The About page still links donations. -->
         <receiver android:name="com.crdroid.settings.fragments.about.DonateReceiver"
-            android:enabled="true"
+            android:enabled="false"
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
